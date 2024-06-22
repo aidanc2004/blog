@@ -1,19 +1,22 @@
 package com.aidancarey2004.blog.post;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 // TODO: @RequestMapping("/api/v1/post")
 public class PostController {
     @GetMapping("/posts")
     public String posts() {
-        return "<h1>Posts</h1>";
+        return "posts";
     }
 
     @GetMapping("/posts/{id}")
-    public String post(@PathVariable Long id) {
+    public String post(@PathVariable Long id, Model model) {
         // TODO: Get a post
-        return "<h1>Post " + id + "</h1>";
+        model.addAttribute("id", id);
+        return "post";
     }
 
     @PostMapping
