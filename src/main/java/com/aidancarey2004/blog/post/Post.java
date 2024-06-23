@@ -1,8 +1,6 @@
 package com.aidancarey2004.blog.post;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -10,6 +8,15 @@ import java.time.LocalDate;
 @Table
 public class Post {
     @Id
+    @SequenceGenerator(
+            name = "post_sequence",
+            sequenceName = "post_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "post_sequence"
+    )
     private Long id;
     private String title;
     private String body;

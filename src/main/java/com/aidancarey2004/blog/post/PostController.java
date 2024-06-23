@@ -1,14 +1,25 @@
 package com.aidancarey2004.blog.post;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
-// TODO: @RequestMapping("/api/v1/post")
 public class PostController {
+    private final PostService postService;
+
+    @Autowired
+    public PostController(PostService postService) {
+        this.postService = postService;
+    }
+
     @GetMapping("/posts")
-    public String posts() {
+    public String posts(Model model) {
+        List<Post> posts = postService.getPosts();
+        model.addAttribute("posts", posts);
         return "posts";
     }
 
