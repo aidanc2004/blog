@@ -14,12 +14,14 @@ public class PostConfig {
     CommandLineRunner commandLineRunner(PostRepository repository) {
         return args -> {
             Post post1 = new Post(
+                    "Aidan Carey",
                     "Post 1",
                     "This is post number one!",
-                    LocalDate.of(2004, Month.NOVEMBER, 13)
+                    LocalDate.now()
             );
 
             Post post2 = new Post(
+                    "Author",
                     "Post 2",
                     "This is post number two!",
                     LocalDate.of(2024, Month.JUNE, 23)

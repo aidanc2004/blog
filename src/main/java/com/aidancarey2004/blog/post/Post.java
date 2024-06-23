@@ -18,20 +18,23 @@ public class Post {
             generator = "post_sequence"
     )
     private Long id;
+    private String author;
     private String title;
     private String body;
     private LocalDate date;
 
     public Post() {};
 
-    public Post(Long id, String title, String body, LocalDate date) {
+    public Post(Long id, String author, String title, String body, LocalDate date) {
         this.id = id;
+        this.author = author;
         this.title = title;
         this.body = body;
         this.date = date;
     }
 
-    public Post(String title, String body, LocalDate date) {
+    public Post(String author, String title, String body, LocalDate date) {
+        this.author = author;
         this.title = title;
         this.body = body;
         this.date = date;
@@ -43,6 +46,14 @@ public class Post {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getTitle() {

@@ -25,8 +25,8 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public String post(@PathVariable Long id, Model model) {
-        // TODO: Get a post
-        model.addAttribute("id", id);
+        Post post = postService.getPost(id);
+        model.addAttribute("post", post);
         return "post";
     }
 
