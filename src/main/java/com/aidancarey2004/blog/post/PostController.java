@@ -1,10 +1,13 @@
 package com.aidancarey2004.blog.post;
 
+import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -24,6 +27,13 @@ public class PostController {
         return "posts";
     }
 
+    @GetMapping("/posts/new")
+    public String newPostPage(Model model) {
+        Post post = new Post();
+        model.addAttribute("post", post);
+        return "newPost";
+    }
+
     @GetMapping("/posts/{id}")
     public String post(@PathVariable Long id, Model model) {
         Post post = postService.getPost(id);
@@ -31,9 +41,10 @@ public class PostController {
         return "post";
     }
 
-    @PostMapping("/posts")
-    public void newPost(@RequestBody Post post) {
+    @PostMapping("/posts/new")
+    public RedirectView newPost(@ModelAttribute Post post) {
         postService.newPost(post);
+        return new RedirectView("/posts");
     }
 
     @PutMapping("/posts/{id}")

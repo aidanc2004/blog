@@ -11,7 +11,9 @@
     <h1>Posts</h1>
 
     <ul th:each="post: ${posts}">
-        <li><span th:text="${post.title}"></span> - <span th:text="${post.body}"></span></li>
+        <li><a th:href="@{/posts/} + ${post.id}" th:text="${post.title}"></a> - <span th:text="${post.body}"></span></li>
     </ul>
+
+    <a th:href="@{/posts/new}">New Post</a>
 </body>
 </html>
