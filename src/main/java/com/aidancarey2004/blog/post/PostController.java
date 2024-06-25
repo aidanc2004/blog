@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.List;
 
@@ -30,9 +31,9 @@ public class PostController {
         return "post";
     }
 
-    @PostMapping
+    @PostMapping("/posts")
     public void newPost(@RequestBody Post post) {
-        // TODO: Make a new post
+        postService.newPost(post);
     }
 
     @PutMapping("/posts/{id}")
@@ -42,6 +43,6 @@ public class PostController {
 
     @DeleteMapping("/posts/{id}")
     public void deletePost(@PathVariable long id) {
-        // TODO: Delete a post
+       postService.deletePost(id);
     }
 }

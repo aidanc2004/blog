@@ -26,4 +26,16 @@ public class PostService {
         }
         return post.get();
     }
+
+    public void deletePost(long id) {
+        Optional<Post> post = postRepository.findById(id);
+        if (!post.isPresent()) {
+            throw new IllegalStateException("Post " + id + " does not exist.");
+        }
+        postRepository.deleteById(id);
+    }
+
+    public void newPost(Post post) {
+        postRepository.save(post);
+    }
 }
