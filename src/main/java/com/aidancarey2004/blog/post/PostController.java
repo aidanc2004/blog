@@ -34,6 +34,13 @@ public class PostController {
         return "newPost";
     }
 
+    @GetMapping("/posts/{id}/update")
+    public String updatePostPage(@PathVariable long id, Model model) {
+        Post post = postService.getPost(id);
+        model.addAttribute("post", post);
+        return "updatePost";
+    }
+
     @GetMapping("/posts/{id}")
     public String post(@PathVariable Long id, Model model) {
         Post post = postService.getPost(id);
@@ -47,9 +54,10 @@ public class PostController {
         return new RedirectView("/posts");
     }
 
-    @PutMapping("/posts/{id}")
-    public void updatePost(@PathVariable long id) {
-        // TODO: Update a post
+    @PostMapping("/posts/{id}/update")
+    public RedirectView updatePost(@ModelAttribute Post post, @PathVariable long id) {
+        postService.updatePost(post);
+        return new RedirectView("/posts");
     }
 
     @DeleteMapping("/posts/{id}")

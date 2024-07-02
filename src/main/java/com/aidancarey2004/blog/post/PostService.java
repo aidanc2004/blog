@@ -1,9 +1,9 @@
 package com.aidancarey2004.blog.post;
 
+import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +38,30 @@ public class PostService {
         postRepository.deleteById(id);
     }
 
-    public void newPost(Post post) {
-        System.out.println(post.toString());
+    public void updatePost(Post post) {
+        List<String> errors = new ArrayList<>();
 
+        // Check for missing fields
+        if (post.getTitle().equals(""))  errors.add("Post missing title");
+        if (post.getBody().equals(""))   errors.add("Post missing body");
+        if (post.getAuthor().equals("")) errors.add("Post missing author");
+
+        // Show an error if any field is missing
+        if (errors.size() != 0) {
+            String error = String.join(", ", errors) + "";
+            throw new IllegalStateException(error);
+        }
+
+        // TODO: Use old date, add date updated
+        post.setDate(LocalDate.now());
+
+        // Delete old and save new
+        // TODO: Saves with a new ID number
+        postRepository.deleteById(post.getId());
+        postRepository.save(post);
+    }
+
+    public void newPost(Post post) {
         List<String> errors = new ArrayList<>();
 
         // Check for missing fields
