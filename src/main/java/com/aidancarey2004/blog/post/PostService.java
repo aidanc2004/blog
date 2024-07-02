@@ -3,6 +3,9 @@ package com.aidancarey2004.blog.post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Array;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +39,22 @@ public class PostService {
     }
 
     public void newPost(Post post) {
+        System.out.println(post.toString());
+
+        List<String> errors = new ArrayList<>();
+
+        // Check for missing fields
+        if (post.getTitle().equals(""))  errors.add("Post missing title");
+        if (post.getBody().equals(""))   errors.add("Post missing body");
+        if (post.getAuthor().equals("")) errors.add("Post missing author");
+
+        // Show an error if any field is missing
+        if (errors.size() != 0) {
+            String error = String.join(", ", errors) + "";
+            throw new IllegalStateException(error);
+        }
+
+        post.setDate(LocalDate.now());
         postRepository.save(post);
     }
 }
