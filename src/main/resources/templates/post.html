@@ -11,7 +11,11 @@
     <a th:href="@{/posts}">Back</a>
 
     <h1 th:text="${post.title}"></h1>
-    <p><span th:text="${post.author}"></span> - <span th:text="${post.date}"></span></p>
+    <p>
+        <span th:text="${post.author}"></span> - <span th:text="${post.date}"></span>
+        <span th:if="${post.updatedDate ne null}">(Updated: <span th:text="${post.updatedDate}"></span>)</span>
+    </p>
+
 
     <a th:href="@{/posts/} + ${post.id} + @{/update}">Update</a>
 

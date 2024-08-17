@@ -22,6 +22,7 @@ public class Post {
     private String title;
     private String body;
     private LocalDate date;
+    private LocalDate updatedDate;
 
     public Post() {};
 
@@ -31,6 +32,7 @@ public class Post {
         this.title = title;
         this.body = body;
         this.date = date;
+        this.updatedDate = null;
     }
 
     public Post(String author, String title, String body, LocalDate date) {
@@ -38,6 +40,7 @@ public class Post {
         this.title = title;
         this.body = body;
         this.date = date;
+        this.updatedDate = null;
     }
 
     public Long getId() {
@@ -80,6 +83,14 @@ public class Post {
         this.date = date;
     }
 
+    public LocalDate getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(LocalDate updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
@@ -87,7 +98,8 @@ public class Post {
                 ", author='" + author + '\'' +
                 ", title='" + title + '\'' +
                 ", body='" + body + '\'' +
-                ", date=" + date +
+                ", date=" + date + '\'' +
+                ", updatedDate=" + updatedDate +
                 '}';
     }
 }

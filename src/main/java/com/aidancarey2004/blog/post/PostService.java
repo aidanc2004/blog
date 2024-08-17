@@ -52,8 +52,13 @@ public class PostService {
             throw new IllegalStateException(error);
         }
 
-        // TODO: Use old date, add date updated
-        post.setDate(LocalDate.now());
+        // Update date using the old post
+        Optional<Post> oldPost = postRepository.findById(post.getId());
+        if (oldPost.isPresent())
+            post.setDate(oldPost.get().getDate());
+
+        // Add updated date
+        post.setUpdatedDate(LocalDate.now());
 
         // Delete old and save new
         // TODO: Saves with a new ID number
